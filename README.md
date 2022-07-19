@@ -3,8 +3,10 @@
 Project name: **_GfkDataViewer_**
 
 **clone project using HTTPS or SSH**
+
 **_HTTPS:_**
 `git clone https://github.com/aquaristar/GfkDataViewer.git`
+
 **_SSH:_**
 `git clone git@github.com:aquaristar/GfkDataViewer.git`
 
@@ -21,6 +23,13 @@ Select interpreter from this path and activate the environment
 
 ```
 pipenv install already installed all packages
+```
+
+**Setup .env to load environment variables**
+
+```
+add .env file in main source directory at the same level with manage.py and .env.example
+and setup all variables using the help of .env.example
 ```
 
 ​

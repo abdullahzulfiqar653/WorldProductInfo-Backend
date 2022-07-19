@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # self started apps:
-
+    'core'
 ]
 
 MIDDLEWARE = [

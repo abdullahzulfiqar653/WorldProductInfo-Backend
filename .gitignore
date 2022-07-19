@@ -120,6 +120,7 @@ venv.bak/
 # mkdocs documentation
 /site
 
+
 # mypy
 .mypy_cache/
 .dmypy.json
@@ -127,3 +128,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Large media files
+*.mp4
+*.tiff
+*.avi
+*.flv
+*.mov
+*.wmv

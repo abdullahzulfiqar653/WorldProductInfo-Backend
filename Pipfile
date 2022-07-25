@@ -11,6 +11,7 @@ django-debug-toolbar = "==3.2.4"
 djangorestframework = "==3.13.1"
 django-cors-headers = "==3.11.0"
 mysqlclient = "*"
+mssql-django = "*"
 
 [dev-packages]
 autopep8 = "*"

@@ -19,6 +19,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
 # False if not in os.environ because of casting above
 DEBUG = env('DEBUG')
@@ -92,16 +93,21 @@ WSGI_APPLICATION = 'source.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+# MY SQL Configration
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': "mssql",
         'HOST': env('DB_HOST'),
         'PORT': env('DB_PORT'),
         'NAME': env('DATABASE_NAME'),
         'USER': env('DATABASE_USER'),
         'PASSWORD': env('DATABASE_PASSWORD'),
+        "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server", },
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

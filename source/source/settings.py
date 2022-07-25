@@ -18,12 +18,15 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
+# SECRET_KEY = 'django-insecure-3(l#(_@h4t($i+q@+3y^4!ypf#j9erd9yflmlg-@^%eo#w4xmq'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # False if not in os.environ because of casting above
 DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+# ALLOWED_HOSTS = ['*']
 
 INTERNAL_IPS = env('INTERNAL_IPS')
 
@@ -92,15 +95,33 @@ WSGI_APPLICATION = 'source.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+#MY SQL Configration
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'HOST': env('DB_HOST'),
+#         'PORT': env('DB_PORT'),
+#         'NAME': env('DATABASE_NAME'),
+#         'USER': env('DATABASE_USER'),
+#         'PASSWORD': env('DATABASE_PASSWORD'),
+#     }
+# }
+
+#MSSQL Configration
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT'),
-        'NAME': env('DATABASE_NAME'),
-        'USER': env('DATABASE_USER'),
-        'PASSWORD': env('DATABASE_PASSWORD'),
-    }
+    "default": {
+        "ENGINE": "mssql",
+        "NAME": "gfk_test",
+        "USER": "root",
+        "PASSWORD": "1234",
+        "HOST": "DESKTOP-AL6IA40",
+        # "PORT": "1433",
+        "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server", 
+        },
+    },
 }
 
 # Password validation

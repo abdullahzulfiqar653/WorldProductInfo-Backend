@@ -1,6 +1,14 @@
-from core.models.productlocal_model import Productlocales
 from django.contrib import admin
+from core.models import Productlocales
+
 
 class ProductlocalesAdmin(admin.ModelAdmin):
-    list_display= ['productid','localeid','isactive','status',]
-admin.site.register(Productlocales,ProductlocalesAdmin)
+    list_display = [
+        'status',
+        'isactive',
+        'localeid',
+        'productid',
+    ]
+
+
+admin.site.register(Productlocales, ProductlocalesAdmin)

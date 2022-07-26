@@ -1,6 +1,15 @@
-from core.models.sysdiagram_model import Sysdiagrams
 from django.contrib import admin
+from core.models import Sysdiagrams
+
 
 class SysdiagramsAdmin(admin.ModelAdmin):
-    list_display= ['name','principal_id','diagram_id','version','definition']
-admin.site.register(Sysdiagrams,SysdiagramsAdmin)
+    list_display = [
+        'name',
+        'version',
+        'definition',
+        'diagram_id',
+        'principal_id',
+    ]
+
+
+admin.site.register(Sysdiagrams, SysdiagramsAdmin)

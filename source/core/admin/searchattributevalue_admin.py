@@ -1,6 +1,15 @@
-from core.models.searchattributevalue_model import SearchAttributeValues
 from django.contrib import admin
+from core.models import SearchAttributeValues
+
 
 class SearchAttributeValuesAdmin(admin.ModelAdmin):
-    list_display= ['valueid','value','absolutevalue','unitid','isabsolute',]
-admin.site.register(SearchAttributeValues,SearchAttributeValuesAdmin)
+    list_display = [
+        'value',
+        'unitid',
+        'valueid',
+        'isabsolute',
+        'absolutevalue',
+    ]
+
+
+admin.site.register(SearchAttributeValues, SearchAttributeValuesAdmin)

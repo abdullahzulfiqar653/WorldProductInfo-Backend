@@ -1,6 +1,16 @@
-from core.models.searchattribute_model import SearchAttribute
 from django.contrib import admin
+from core.models import SearchAttribute
+
 
 class SearchAttributeAdmin(admin.ModelAdmin):
-    list_display= ['productid','attributeid','valueid','localeid','setnumber','isactive',]
-admin.site.register(SearchAttribute,SearchAttributeAdmin)
+    list_display = [
+        'valueid',
+        'localeid',
+        'isactive',
+        'setnumber',
+        'productid',
+        'attributeid',
+    ]
+
+
+admin.site.register(SearchAttribute, SearchAttributeAdmin)

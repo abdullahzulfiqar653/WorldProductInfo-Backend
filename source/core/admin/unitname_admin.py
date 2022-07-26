@@ -1,6 +1,13 @@
-from core.models.unitname_model import Unitnames
 from django.contrib import admin
+from core.models import Unitnames
+
 
 class UnitnamesAdmin(admin.ModelAdmin):
-    list_display= ['unitid','name','localeid',]
-admin.site.register(Unitnames,UnitnamesAdmin)
+    list_display = [
+        'name',
+        'unitid',
+        'localeid',
+    ]
+
+
+admin.site.register(Unitnames, UnitnamesAdmin)

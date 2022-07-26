@@ -1,6 +1,12 @@
-from core.models.manufacturermapping_model import Manufacturermapping
 from django.contrib import admin
+from core.models import Manufacturermapping
+
 
 class ManufacturermappingAdmin(admin.ModelAdmin):
-    list_display= ['manufacturername','manufacturerid',]
-admin.site.register(Manufacturermapping,ManufacturermappingAdmin)
+    list_display = [
+        'manufacturerid',
+        'manufacturername',
+    ]
+
+
+admin.site.register(Manufacturermapping, ManufacturermappingAdmin)

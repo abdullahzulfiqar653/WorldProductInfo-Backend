@@ -1,6 +1,13 @@
-from core.models.headername_model import Headernames
 from django.contrib import admin
+from core.models import Headernames
+
 
 class HeadernamesAdmin(admin.ModelAdmin):
-    list_display= ['headerid','name','localeid',]
-admin.site.register(Headernames,HeadernamesAdmin)
+    list_display = [
+        'name',
+        'headerid',
+        'localeid',
+    ]
+
+
+admin.site.register(Headernames, HeadernamesAdmin)

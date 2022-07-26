@@ -1,6 +1,15 @@
-from core.models.locale_model import Locales
+from core.models import Locales
 from django.contrib import admin
 
+
 class LocalesAdmin(admin.ModelAdmin):
-    list_display= ['localeid','isactive','languagecode','countrycode','name',]
-admin.site.register(Locales,LocalesAdmin)
+    list_display = [
+        'name',
+        'localeid',
+        'isactive',
+        'countrycode',
+        'languagecode',
+    ]
+
+
+admin.site.register(Locales, LocalesAdmin)

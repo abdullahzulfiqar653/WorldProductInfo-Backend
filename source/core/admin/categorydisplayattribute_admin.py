@@ -1,6 +1,17 @@
-from core.models.categorydisplayattribute_models import Categorydisplayattributes
 from django.contrib import admin
+from core.models import Categorydisplayattributes
+
 
 class categorydisplayattributeAdmin(admin.ModelAdmin):
-    list_display= ['cat_id','headerid','categoryid','attributeid','isactive','templatetype','displayorder',]
-admin.site.register(Categorydisplayattributes,categorydisplayattributeAdmin)
+    list_display = [
+        'cat_id',
+        'isactive',
+        'headerid',
+        'categoryid',
+        'attributeid',
+        'displayorder',
+        'templatetype',
+    ]
+
+
+admin.site.register(Categorydisplayattributes, categorydisplayattributeAdmin)

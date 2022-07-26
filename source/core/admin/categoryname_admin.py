@@ -1,6 +1,13 @@
-from core.models.categoryname_model import Categorynames
 from django.contrib import admin
+from core.models import Categorynames
+
 
 class CategorynameAdmin(admin.ModelAdmin):
-    list_display= ['categoryid','name','localeid']
-admin.site.register(Categorynames,CategorynameAdmin)
+    list_display = [
+        'name',
+        'localeid',
+        'categoryid',
+    ]
+
+
+admin.site.register(Categorynames, CategorynameAdmin)

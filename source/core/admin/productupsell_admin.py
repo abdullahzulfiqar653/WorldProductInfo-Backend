@@ -1,6 +1,13 @@
-from core.models.productupsell_model import Productupsell
 from django.contrib import admin
+from core.models import Productupsell
+
 
 class ProductupsellAdmin(admin.ModelAdmin):
-    list_display= ['productid','upsellproductid','isactive',]
-admin.site.register(Productupsell,ProductupsellAdmin)
+    list_display = [
+        'isactive',
+        'productid',
+        'upsellproductid',
+    ]
+
+
+admin.site.register(Productupsell, ProductupsellAdmin)

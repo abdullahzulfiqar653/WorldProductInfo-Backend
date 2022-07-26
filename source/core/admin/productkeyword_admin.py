@@ -1,6 +1,14 @@
-from core.models.productkeyword_model import Productkeywords
 from django.contrib import admin
+from core.models import Productkeywords
+
 
 class ProductkeywordsAdmin(admin.ModelAdmin):
-    list_display= ['productid','keywords','localeid','isactive',]
-admin.site.register(Productkeywords,ProductkeywordsAdmin)
+    list_display = [
+        'keywords',
+        'localeid',
+        'isactive',
+        'productid',
+    ]
+
+
+admin.site.register(Productkeywords, ProductkeywordsAdmin)

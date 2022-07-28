@@ -4,9 +4,10 @@ from re import T
 from django.db import models
 from .product_model import Product
 
+
 class Productskus(models.Model):
     productid = models.ForeignKey(
-        Product, on_delete=models.CASCADE, db_column='productid')
+        Product, on_delete=models.CASCADE, db_column='productid', related_name='productSkus')
     name = models.CharField(
         max_length=60)
     sku = models.CharField(

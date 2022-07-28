@@ -7,7 +7,7 @@ from .locale_model import Locales
 
 class Productlocales(models.Model):
     productid = models.ForeignKey(
-        Product, on_delete=models.CASCADE, db_column='productid')
+        Product, on_delete=models.CASCADE, db_column='productid', related_name='productLocale')
     localeid = models.ForeignKey(
         Locales, on_delete=models.CASCADE, blank=True, db_column='localeid')
     isactive = models.BooleanField()

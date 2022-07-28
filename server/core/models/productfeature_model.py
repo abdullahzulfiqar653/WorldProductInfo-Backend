@@ -5,11 +5,12 @@ from django.db import models
 from .locale_model import Locales
 from .product_model import Product
 
+
 class Productfeatures(models.Model):
     productfeatureid = models.DecimalField(
         primary_key=True, max_digits=24, decimal_places=0)
     productid = models.ForeignKey(
-        Product, on_delete=models.CASCADE, db_column='productid')
+        Product, on_delete=models.CASCADE, db_column='productid', related_name='productFeatures')
     localeid = models.ForeignKey(
         Locales, on_delete=models.CASCADE, blank=True, db_column='localeid')
     ordernumber = models.SmallIntegerField()

@@ -8,7 +8,7 @@ from .locale_model import Locales
 class Productelements(models.Model):
     productelementid = models.BigIntegerField(primary_key=True)
     productid = models.ForeignKey(
-        Product, on_delete=models.CASCADE, db_column='productid')
+        Product, on_delete=models.CASCADE, db_column='productid', related_name='productElements')
     type = models.CharField(
         max_length=60)
     localeid = models.ForeignKey(

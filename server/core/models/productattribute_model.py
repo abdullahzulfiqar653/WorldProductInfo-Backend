@@ -6,9 +6,10 @@ from .attributename_model import Attributenames
 from .unit_model import Units
 from .locale_model import Locales
 
+
 class Productattribute(models.Model):
     productid = models.ForeignKey(
-        Product, on_delete=models.CASCADE, db_column='productid')
+        Product, on_delete=models.CASCADE, db_column='productid', related_name='productAttribute')
     attributeid = models.ForeignKey(
         Attributenames, on_delete=models.CASCADE, blank=True, db_column='attributeid')
     setnumber = models.SmallIntegerField()

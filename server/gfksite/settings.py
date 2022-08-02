@@ -90,7 +90,7 @@ DATABASES = {
     'default': {
         'ENGINE': "mssql",
         'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT'),
+        # 'PORT': env('DB_PORT'),
         'NAME': env('DATABASE_NAME'),
         'USER': env('DATABASE_USER'),
         'PASSWORD': env('DATABASE_PASSWORD'),

@@ -8,5 +8,8 @@ urlpatterns = [
     path('product/manufacturer/<pk>', ProductManufacterFilter.as_view()),
     path('product/category/', ProductCategoryFilter.as_view()),
     path('product/producttype/', ProductTypeFilter.as_view()),
-    path('category/name/', ManufacturerFilter.as_view()),
+    path('manufacturer/name/', ManufacturerFilter.as_view()),
+    path('category/name/', CategoryNameFilter.as_view()),
+    path('product/producttype/name/', ProductTypeFilterNames.as_view()),
+    path('product/Attribute/name/', ProductAttribuiteFilterNames.as_view()),
 ]

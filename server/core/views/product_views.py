@@ -3,9 +3,9 @@ from rest_framework.generics import RetrieveAPIView, ListAPIView
 from rest_framework.response import Response
 from core.serializers import *
 from core.models import *
-from core.serializers.product_serializers import ProductSerializer, ManufacturerSerializer
-from core.serializers.product_list_serializers import ProductListSerializer
-from core.serializers.categories_serializers import CategoryListSerializer
+from core.serializers.product_serializers import *
+from core.serializers.product_list_serializers import *
+from core.serializers.categories_serializers import *
 
 
 class ProductRetrieveView(RetrieveAPIView):
@@ -89,17 +89,13 @@ class CategoryNameFilter(ListAPIView):
     serializer_class = CategoryListSerializer
 
     def get_queryset(self):
-        parent_cat_level = Category.objects.get(categoryid=1).catlevel
-        cat_queryset = Category.objects.filter(parentcategoryid=1)
+
+        cat_queryset = Category.objects.filter(parentcategoryid=10041)
 
         cat_ids = list(cat_queryset.values_list('categoryid', flat=True))
 
-        for i in range(parent_cat_level + 1, 4):
-            queryset = cat_queryset.filter(catlevel=i).exclude(
-                parentcategoryid__in=cat_ids)
-
         queryset = Category.objects.filter(
-            parentcategoryid__in=queryset)
+            categoryid__in=cat_ids)
 
         return queryset
 
@@ -111,4 +107,32 @@ class ManufacturerFilter(ListAPIView):
         cat_list = Product.objects.filter(categoryid=10025).values_list(
             'manufacturerid', flat=True).distinct()
         queryset = Manufacturer.objects.filter(manufacturerid__in=cat_list)
+        return queryset
+
+
+class ProductTypeFilterNames(ListAPIView):
+    serializer_class = SearchAttributeValuesSerializer
+
+    def get_queryset(self):
+        product_ids = Product.objects.filter(
+            categoryid=10925).values_list('productid', flat=True).distinct()
+        print(product_ids)
+        v_ids = SearchAttribute.objects.filter(
+            productid__in=product_ids).values_list('valueid', flat=True).order_by('valueid')
+        queryset = SearchAttributeValues.objects.filter(valueid__in=v_ids)
+
+        return queryset
+
+
+class ProductAttribuiteFilterNames(ListAPIView):
+    serializer_class = ProductAttributeSerializer
+
+    def get_queryset(self):
+        product_ids = Product.objects.filter(
+            categoryid=10925).values_list('productid', flat=True).distinct().prefetch_related('productid')
+        v_ids = SearchAttribute.objects.filter(
+            productid__in=product_ids).values_list('attributeid', flat=True).distinct().prefetch_related('attributeid')
+        queryset = Productattribute.objects.filter(attributeid__in=v_ids, productid__categoryid=10925).prefetch_related(
+            'attributeid').select_related('attributeid')
+
         return queryset

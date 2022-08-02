@@ -129,3 +129,9 @@ class ProductSerializer(serializers.ModelSerializer):
             'productSkus',
             'productLocale',
         ]
+
+
+class SearchAttributeValuesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SearchAttributeValues
+        fields = ['value', ]

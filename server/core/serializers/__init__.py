@@ -1,4 +1,4 @@
 from .categorylist_serializer import CategoryListSerializer
 from .categoryfiltername_serializer import CategoryFilterNameListSerializer
-from .producttypefiltername_serializer import SearchAttributeValuesSerializer
+from .producttypefiltername_serializer import SearchAttributeValuesListSerializer
 from .manufacturerfilternames_serializer import ManufacturerFilterNameSerializer

@@ -15,7 +15,8 @@ class ProductTypeFilterNames(ListAPIView):
             'parentcategoryid', None)
 
         parent_category_id = Category.objects.filter(
-            parentcategoryid=parent_category_id).select_related('categoryid').values_list('categoryid', flat=True)
+            parentcategoryid=parent_category_id).select_related('categoryid').values_list(
+            'categoryid', flat=True)
         product_ids = Product.objects.filter(
             categoryid__in=parent_category_id).values_list('productid', flat=True).distinct()
         values_ids = SearchAttribute.objects.filter(

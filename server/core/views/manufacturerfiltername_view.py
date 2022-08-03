@@ -9,10 +9,11 @@ class ManufacturerFilter(ListAPIView):
     serializer_class = ManufacturerFilterNameSerializer
 
     def get_queryset(self):
-        category_id = self.request.query_params.get(
-            'categoryid', None)
-        manufacturer_ids = Product.objects.filter(categoryid=category_id).values_list(
-            'manufacturerid', flat=True).distinct()
+        category_id = self.request.query_params.get('categoryid', None)
+
+        manufacturer_ids = Product.objects.filter(categoryid=category_id).values(
+            'manufacturerid').distinct()
+
         queryset = Manufacturer.objects.filter(
             manufacturerid__in=manufacturer_ids)
         return queryset

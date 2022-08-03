@@ -1,5 +1,3 @@
-from unicodedata import category
-from rest_framework import serializers
 from rest_framework import permissions
 from rest_framework.generics import ListAPIView
 from core.serializers import SearchAttributeValuesSerializer

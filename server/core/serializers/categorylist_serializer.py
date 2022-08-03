@@ -13,5 +13,5 @@ class CategoryListSerializer(serializers.ModelSerializer):
             'categoryid',
             'ordernumber',
             'category_label',
-            'parentcategoryid'
+            'parentcategoryid',
         ]

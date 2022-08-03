@@ -8,4 +8,4 @@ class CategoryListView(ListAPIView):
     serializer_class = CategoryListSerializer
     permission_classes = [permissions.AllowAny]
     queryset = Category.objects.exclude(
-        parentcategoryid__isnull=True).prefetch_related('categorylol')
+        parentcategoryid__isnull=True).select_related('categorylol')

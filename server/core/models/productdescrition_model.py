@@ -5,9 +5,10 @@ from django.db import models
 from .product_model import Product
 from .locale_model import Locales
 
+
 class Productdescriptions(models.Model):
     productid = models.ForeignKey(
-        Product, on_delete=models.CASCADE, db_column='productid')
+        Product, on_delete=models.CASCADE, db_column='productid', related_name='productDescription')
     description = models.CharField(
         max_length=1000)
     isdefault = models.BooleanField()

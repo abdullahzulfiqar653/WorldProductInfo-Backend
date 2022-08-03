@@ -11,7 +11,7 @@ class Categorydisplayattributes(models.Model):
     headerid = models.ForeignKey(
         Headernames, on_delete=models.CASCADE, db_column='headerid')
     categoryid = models.ForeignKey(
-        Category, on_delete=models.CASCADE, db_column='categoryid')
+        Category, on_delete=models.CASCADE, db_column='categoryid',related_name='categoryDisplayAttributeValue')
     attributeid = models.ForeignKey(
         Attributenames, on_delete=models.CASCADE, blank=True, db_column='attributeid')
     isactive = models.BooleanField()

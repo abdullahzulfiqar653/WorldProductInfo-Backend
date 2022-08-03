@@ -1,1 +1,2 @@
 from .categorylist_serializer import CategoryListSerializer
+from .categoryfiltername_serializer import CategoryFilterNameSerializer

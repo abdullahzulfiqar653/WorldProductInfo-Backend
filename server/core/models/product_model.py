@@ -5,6 +5,7 @@ from django.db import models
 from .manufacturer_model import Manufacturer
 from .category_model import Category
 
+
 class Product(models.Model):
     productid = models.IntegerField(primary_key=True)
     manufacturerid = models.ForeignKey(
@@ -13,7 +14,7 @@ class Product(models.Model):
     mfgpartno = models.CharField(
         max_length=70)
     categoryid = models.ForeignKey(
-        Category, on_delete=models.CASCADE, db_column='categoryid')
+        Category, on_delete=models.CASCADE, db_column='categoryid', related_name='categoryproduct')
     isaccessory = models.BooleanField(default=False)
     equivalency = models.FloatField()
     creationdate = models.DateTimeField(auto_now_add=True)

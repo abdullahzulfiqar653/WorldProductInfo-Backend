@@ -1,1 +1,2 @@
 from .categorylist_view import CategoryListView
+from .categoryfiltername_view import CategoryFilterNameView

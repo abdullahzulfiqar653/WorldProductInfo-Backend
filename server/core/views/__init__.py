@@ -1,2 +1,3 @@
 from .categorylist_view import CategoryListView
-from .categoryfiltername_view import CategoryFilterNameView
+from .categoryfilternames_view import CategoryFilterNameView
+from .producttypefilter_view import ProductTypeFilterNames

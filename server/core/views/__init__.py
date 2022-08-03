@@ -1,1 +1,1 @@
-from .categorylist_view import *
+from .categorylist_view import CategoryListView

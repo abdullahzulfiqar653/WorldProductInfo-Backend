@@ -1,6 +1,11 @@
 from rest_framework import serializers
-from core.models import *
-from core.serializers.product_serializers import *
+from core.models import Product
+from core.serializers import (
+    ProductSkusSerializer,
+    ProductElementsSerializer,
+    ProductDescriptionsSerializer
+
+)
 
 
 class ProductListSerializer(serializers.ModelSerializer):

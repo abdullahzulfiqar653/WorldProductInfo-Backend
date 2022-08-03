@@ -76,7 +76,7 @@ class ProductTypeFilter(ListAPIView):
         product_ids = list(SearchAttribute.objects.filter(
             valueid=2369529).values_list('productid', flat=True))
         print(product_ids)
-        queryset = Product.objects.filter(productid__in=product_ids, categoryid=10206
+        queryset = Product.objects.filter(productid__in=product_ids, categoryid=10208
                                           ).prefetch_related(
             'productDescription',
             'productSkus',

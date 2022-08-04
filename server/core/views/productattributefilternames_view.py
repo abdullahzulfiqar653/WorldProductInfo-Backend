@@ -2,9 +2,16 @@ from rest_framework import permissions
 from rest_framework.generics import ListAPIView
 from core.serializers import ProductAttributeSerializer
 from core.models import Productattribute, SearchAttribute, Product
+from core.models import Attributenames
+from core.models import SearchAttributeValues
 
 
 class ProductAttribuiteFilterNames(ListAPIView):
+    
+    """Use this endpoint for getting Feature Product name and values filter by using category id.
+    The category could posted in url parems. 
+    """
+
     permission_classes = [permissions.AllowAny]
     serializer_class = ProductAttributeSerializer
 
@@ -12,12 +19,12 @@ class ProductAttribuiteFilterNames(ListAPIView):
         category_id = self.request.query_params.get(
             'categoryid', None)
         product_ids = Product.objects.filter(
-            categoryid=category_id).values_list('productid', flat=True).distinct().prefetch_related('productid')
-        attribute_ids = SearchAttribute.objects.filter(
-            productid__in=product_ids).values_list(
-                'attributeid', flat=True).distinct().prefetch_related('attributeid')
+            categoryid=category_id).values('productid')
         queryset = SearchAttribute.objects.filter(
-            productid=product_ids, productid__categoryid=category_id).prefetch_related(
-            'attributeid',).select_related('attributeid').distinct()
+            productid__in=product_ids).prefetch_related('attributeid', 'valueid')
+        # queryset_a = Attributenames.objects.filter(
+        #     attributeid__in=attribute_ids).values('name')
+        # queryset_b = SearchAttributeValues.objects.filter(
+        #     valueid__in=value_ids).values('value')
 
         return queryset

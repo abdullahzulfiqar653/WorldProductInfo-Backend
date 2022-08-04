@@ -10,7 +10,7 @@ class SearchAttribute(models.Model):
     productid = models.ForeignKey(
         Product, on_delete=models.CASCADE, db_column='productid')
     attributeid = models.ForeignKey(
-        Attributenames, on_delete=models.CASCADE, db_column='attributeid')
+        Attributenames, on_delete=models.CASCADE, db_column='attributeid',related_name='searchAttributeName')
     valueid = models.ForeignKey(
         SearchAttributeValues, on_delete=models.CASCADE, db_column='valueid')
     localeid = models.ForeignKey(

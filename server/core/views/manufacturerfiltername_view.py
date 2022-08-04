@@ -5,15 +5,19 @@ from core.serializers import ManufacturerFilterNameSerializer
 
 
 class ManufacturerFilter(ListAPIView):
+
+    """Use this endpoint for getting manufacturer name for filter by using category id.
+    The category id could posted here by using urls params 
+
+    """
+
     permission_classes = [permissions.AllowAny]
     serializer_class = ManufacturerFilterNameSerializer
 
     def get_queryset(self):
         category_id = self.request.query_params.get('categoryid', None)
-
         manufacturer_ids = Product.objects.filter(categoryid=category_id).values(
             'manufacturerid').distinct()
-
         queryset = Manufacturer.objects.filter(
             manufacturerid__in=manufacturer_ids)
         return queryset

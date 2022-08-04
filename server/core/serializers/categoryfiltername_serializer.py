@@ -1,5 +1,5 @@
-from core.models import Category, Product
 from rest_framework import serializers
+from core.models import Category, Product
 
 
 class CategoryFilterNameListSerializer(serializers.ModelSerializer):

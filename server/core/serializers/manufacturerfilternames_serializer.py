@@ -8,7 +8,7 @@ class ManufacturerFilterNameSerializer(serializers.ModelSerializer):
     def get_manufacturer_product_count(self, obj: Manufacturer):
         category_id = self.context['categoryid']
         return Product.objects.filter(
-            manufacturerid=obj.manufacturerid, categoryid=category_id).count()
+            manufacturerid=obj.manufacturerid, categoryid=category_id).select_related('manufacturerid').count()
 
     class Meta:
         model = Manufacturer

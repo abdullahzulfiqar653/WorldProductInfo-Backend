@@ -11,7 +11,7 @@ class Productattribute(models.Model):
     productid = models.ForeignKey(
         Product, on_delete=models.CASCADE, db_column='productid', related_name='productAttribute')
     attributeid = models.ForeignKey(
-        Attributenames, on_delete=models.CASCADE, blank=True, db_column='attributeid')
+        Attributenames, on_delete=models.CASCADE, blank=True, db_column='attributeid', related_name='productAttributeName')
     setnumber = models.SmallIntegerField()
     # This field type is a guess.
     displayvalue = models.TextField(

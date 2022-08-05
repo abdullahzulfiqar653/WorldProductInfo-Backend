@@ -1,4 +1,5 @@
 from django.db.models import Q
+from core.utils import all_categories_have_no_childs
 from rest_framework import permissions
 from core.models import Category, Product
 from rest_framework.generics import ListAPIView
@@ -7,27 +8,23 @@ from core.serializers import CategoryFilterNameListSerializer
 
 class CategoryFilterNameView(ListAPIView):
 
-    """ This ListView for getting category filter names 
-        by using ParentCategoryId from the category table.
-    """
+    """Listing category filter names for left dsiplayed filters on product 
+    listing page by using ParentCategoryId from the category table."""
 
     permission_classes = [permissions.AllowAny]
     serializer_class = CategoryFilterNameListSerializer
 
     def get_queryset(self):
-        parent_category_id = self.request.query_params.get(
-            'parentcategoryid', None)
-        # getting category Id by using parent category id from the category table.
-        category_ids = Category.objects.filter(
-            parentcategoryid=parent_category_id).values('categoryid')
-        """
-        getting CategoryIds by using category Ids from the product table.
-        And exclude all category Ids That have no products In the given list of categories.
-        """
+        category_id = self.request.query_params.get(
+            'categoryid', None)
+        all_categories = all_categories_have_no_childs(category_id)
+
+        # excluding those categories who dont have any product available
         products_category_ids = Product.objects.exclude(
-            ~Q(categoryid__in=category_ids)).values('categoryid')
-        # getting categories name and ids by using Filtered category ids that have no category child.
-        # select_related is used for getting category name and id from the category table by using revese relations.
+            ~Q(categoryid__in=all_categories)).values('categoryid')
+
+        # getting categories also these categories have no childs.
+        # using select_related to pre load categoryname table data
         queryset = Category.objects.filter(
             categoryid__in=products_category_ids).select_related('categorylol')
 

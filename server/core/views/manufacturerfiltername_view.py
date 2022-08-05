@@ -1,30 +1,32 @@
 from rest_framework import permissions
 from core.models import Manufacturer, Product
 from rest_framework.generics import ListAPIView
+from core.utils import categories_with_all_childs
 from core.serializers import ManufacturerFilterNameSerializer
 
 
 class ManufacturerFilter(ListAPIView):
-    """This ListView for getting Manufacturer names, and product count.
-        For the related manufacturer, get the product count in the selected category id.
-
-
-    """
+    """Listing Manufacturer filter names for left dsiplayed filters on product 
+    listing page by using CategoryId from the Manufacturer table."""
 
     permission_classes = [permissions.AllowAny]
     serializer_class = ManufacturerFilterNameSerializer
 
+    def __init__(self, **kwargs) -> None:
+        self.all_categories = None
+
     def get_queryset(self):
         category_id = self.request.query_params.get('categoryid', None)
-        # Getting manufacturer id from the product table and remove the duplicates.
-        manufacturer_ids = Product.objects.filter(categoryid=category_id).values(
+        # getting all child categoryIds by using CategoryId from the category table.
+        self.all_categories = categories_with_all_childs(category_id)
+
+        # manufacturerids from the product table and remove the duplicates.
+        manufacturer_ids = Product.objects.filter(categoryid__in=self.all_categories).values(
             'manufacturerid').distinct()
-        # Getting the manufacturer query set by using the filtered manufacturer id.
+        # Getting manufacturer queryset on the basis of filtered manufacturerIds
         queryset = Manufacturer.objects.filter(
             manufacturerid__in=manufacturer_ids)
         return queryset
 
     def get_serializer_context(self):
-        """This method is used to pass the category id to the serializer."""
-        return {'categoryid': self.request.query_params.get(
-            'categoryid', None)}
+        return {'categoryids': self.all_categories}

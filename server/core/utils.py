@@ -32,6 +32,7 @@ def categories_with_all_childs(category_id):
     all_childs_of_requested_category = []
     category_ids_to_get_childs = []
     category_ids_to_get_childs.append(category_id)
+    all_childs_of_requested_category.append(category_id)
     # getting categoryIds by using parentCategoryId from the category table.
     while True:
         category_ids = Category.objects.filter(

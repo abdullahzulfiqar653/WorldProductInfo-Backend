@@ -4,7 +4,7 @@ from rest_framework.generics import ListAPIView
 from core.serializers import ProductListSerializer
 
 
-class ProductListView(ListAPIView):
+class ProductAttributeListView(ListAPIView):
 
     """This ListView for getting product list in category page 
     and filter the Product list by using and CategoryId.

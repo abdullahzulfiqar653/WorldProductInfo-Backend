@@ -7,10 +7,8 @@ from core.models import SearchAttributeValues
 
 
 class ProductAttribuiteFilterNames(ListAPIView):
-    
-    """Use this endpoint for getting Feature Product name and values filter by using category id.
-    The category could posted in url parems. 
-    """
+
+    """ This ListView is used to get attribute names and value from the search attribute table. """
 
     permission_classes = [permissions.AllowAny]
     serializer_class = ProductAttributeSerializer

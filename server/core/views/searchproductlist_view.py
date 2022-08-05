@@ -6,16 +6,18 @@ from core.models import Product, Productdescriptions
 
 class SearchProductListView(ListAPIView):
 
-    """send search as query param to get product list """
+    """This ListView for getting product list in category page by using search keyword."""
 
     serializer_class = ProductListSerializer
     permission_classes = [permissions.AllowAny]
 
     def get_queryset(self):
         search = self.request.query_params.get('search', None)
+        # getting product id from the product table by using search keyword.
         product_ids = Productdescriptions.objects.filter(
             description__icontains=search).values('productid')
-
+        # getting the product query set by using the filtered product id.
+        # prefectching the product description, product skus and product elements by using prefetch_related.
         queryset = Product.objects.filter(
             productid__in=product_ids).prefetch_related(
             'productDescription',

@@ -5,9 +5,9 @@ from core.serializers import ProductListSerializer
 
 
 class ProductTypeFilterListView(ListAPIView):
-
-    """ send value id as query param to get product list 
-    and category id as query param to get product list that have no chiled category """
+    """This ListView for getting product List by using product type filter in the selected category page.
+    Note: The category id could be posted in params that have no child category.
+   """
 
     serializer_class = ProductListSerializer
     permission_classes = [permissions.AllowAny]
@@ -17,8 +17,11 @@ class ProductTypeFilterListView(ListAPIView):
             'categoryid', None)
         value_id = self.request.query_params.get(
             'valueid', None)
+        # getting product id from the Search attribute  table by using valueid.
         product_ids = SearchAttribute.objects.filter(
             valueid=value_id).values('productid')
+        # getting the product query set by using the filtered product id and category_id.
+        # prefectching the product description, product skus and product elements by using prefetch_related.
         queryset = Product.objects.filter(productid__in=product_ids, categoryid=category_id
                                           ).prefetch_related(
             'productDescription',

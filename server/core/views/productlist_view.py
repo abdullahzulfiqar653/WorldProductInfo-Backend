@@ -1,8 +1,9 @@
-from core.models import Product, Productdescriptions,SearchAttribute
 from rest_framework import permissions
+from core.utils import LimitOffsetPagination
 from rest_framework.generics import ListAPIView
 from core.utils import categories_with_all_childs
 from core.serializers import ProductListSerializer
+from core.models import Product, Productdescriptions, SearchAttribute
 
 
 class ProductListView(ListAPIView):
@@ -11,6 +12,7 @@ class ProductListView(ListAPIView):
     """
 
     serializer_class = ProductListSerializer
+    pagination_class = LimitOffsetPagination
     permission_classes = [permissions.AllowAny]
 
     def __init__(self, **kwargs) -> None:
@@ -24,8 +26,8 @@ class ProductListView(ListAPIView):
         value_id = self.request.query_params.get(
             'valueid', None)
         manufacturer_id = self.request.query_params.get('manufacturerid', None)
-        
-        if flag.lower()=='manufacturer':
+
+        if flag.lower() == 'manufacturer':
             # getting all child categories of the category ids
             self.all_categories = categories_with_all_childs(category_id)
             # Getting product id from the product table by using manufacturer id .
@@ -33,8 +35,8 @@ class ProductListView(ListAPIView):
                 manufacturerid=manufacturer_id).values('productid')
             # Getting the product query set by using the filtered product id.
             queryset = Product.objects.filter(productid__in=product_ids,
-                                            categoryid__in=self.all_categories
-                                            ).prefetch_related(
+                                              categoryid__in=self.all_categories
+                                              ).prefetch_related(
                 'productDescription',
                 'productSkus',
                 'productElements__productElementProperties'
@@ -52,6 +54,7 @@ class ProductListView(ListAPIView):
                 'productElements__productElementProperties'
             )
             return queryset
+
         elif flag.lower() == 'search':
 
             # getting product id from the product table by using search keyword.
@@ -77,7 +80,7 @@ class ProductListView(ListAPIView):
             # getting the product query set by using the filtered product id and category_id.
             # prefectching the product description, product skus and product elements by using prefetch_related.
             queryset = Product.objects.filter(productid__in=product_ids, categoryid__in=self.all_categories
-                                            ).prefetch_related(
+                                              ).prefetch_related(
                 'productDescription',
                 'productSkus',
                 'productElements__productElementProperties'

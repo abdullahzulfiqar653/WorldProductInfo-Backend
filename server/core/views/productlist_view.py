@@ -27,7 +27,7 @@ class ProductListView(ListAPIView):
             'valueid', None)
         manufacturer_id = self.request.query_params.get('manufacturerid', None)
 
-        if flag.lower() == 'manufacturer':
+        if flag == 'manufacturer':
             # getting all child categories of the category ids
             self.all_categories = categories_with_all_childs(category_id)
             # Getting product id from the product table by using manufacturer id .
@@ -42,7 +42,7 @@ class ProductListView(ListAPIView):
                 'productElements__productElementProperties'
             )
             return queryset
-        elif flag.lower() == 'category':
+        elif flag == 'category':
 
             # getting all child categories of the category ids
             self.all_categories = categories_with_all_childs(category_id)
@@ -55,7 +55,7 @@ class ProductListView(ListAPIView):
             )
             return queryset
 
-        elif flag.lower() == 'search':
+        elif flag == 'search':
 
             # getting product id from the product table by using search keyword.
             product_ids = Productdescriptions.objects.filter(
@@ -70,7 +70,7 @@ class ProductListView(ListAPIView):
             )
             return queryset
 
-        elif flag.lower() == 'productType':
+        elif flag == 'producttype':
 
             # getting product id from the Search attribute  table by using valueid.
             product_ids = SearchAttribute.objects.filter(

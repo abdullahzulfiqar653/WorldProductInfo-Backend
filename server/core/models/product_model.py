@@ -9,7 +9,7 @@ from .category_model import Category
 class Product(models.Model):
     productid = models.IntegerField(primary_key=True)
     manufacturerid = models.ForeignKey(
-        Manufacturer, on_delete=models.CASCADE, db_column='manufacturerid')
+        Manufacturer, on_delete=models.CASCADE, db_column='manufacturerid',related_name='manufacturerproduct')
     isactive = models.BooleanField()
     mfgpartno = models.CharField(
         max_length=70)

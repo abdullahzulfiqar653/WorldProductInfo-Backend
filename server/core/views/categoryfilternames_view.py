@@ -25,11 +25,14 @@ class CategoryFilterNameView(ListAPIView):
         products_category_ids = Product.objects.exclude(
             ~Q(categoryid__in=all_categories)).values('categoryid')
 
-        # getting categories also these categories have no childs.
-        # using select_related to pre load categoryname table data
-        # using Annotations to get the count of products for each category and prefetch_related to pre load products.
+        """
+        1: getting categories also these categories have no childs.
+        2: using select_related to pre load categoryname table data
+        3: using Annotations to get the count of products for each category
+        4: prefetch_related to pre load products table.
+        """
         queryset = Category.objects.filter(
             categoryid__in=products_category_ids).annotate(
                 product_count=Count('categoryproduct')).select_related(
-                    'categorylol').prefetch_related('categoryproduct')
+                    'categorylol').prefetch_related('categoryproduct').order_by("-product_count")
         return queryset

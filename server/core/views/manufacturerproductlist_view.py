@@ -20,7 +20,7 @@ class ProductManufacterFilterListView(ListAPIView):
     def get_queryset(self):
         category_id = self.request.query_params.get('categoryid', None)
         manufacturer_id = self.request.query_params.get('manufacturerid', None)
-        #getting all child categories of the category ids
+        # getting all child categories of the category ids
         self.all_categories = categories_with_all_childs(category_id)
         # Getting product id from the product table by using manufacturer id .
         product_ids = Product.objects.filter(

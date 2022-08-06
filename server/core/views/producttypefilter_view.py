@@ -9,7 +9,7 @@ from core.models import Product, SearchAttribute, SearchAttributeValues, Categor
 class ProductTypeFilterNames(ListAPIView):
 
     """Listing product filter names for left dsiplayed filters on product 
-    listing page by using CategoryId from the SearchAttributeValues table."""
+    listing page from the SearchAttributeValues table."""
 
     permission_classes = [permissions.AllowAny]
     serializer_class = SearchAttributeValuesListSerializer
@@ -25,9 +25,13 @@ class ProductTypeFilterNames(ListAPIView):
         # getting valueIds from searchAttributeTable by using filtered productIds
         values_ids = SearchAttribute.objects.filter(
             productid__in=product_ids, attributeid__name='Product Type').values('valueid')
-        # getting valueNames from  searchAttributeValues table by using filtered value_ids
-        # annotate to get the count of products for each value and prefetch_related to pre load products using related name.
+
+        """
+        1: getting queryset of searchAttributeValues table by using filtered value_ids
+        2: using Annotations to get the count of products for each category
+        3: prefetch_related to pre load searchAttributeValue."""
         queryset = SearchAttributeValues.objects.filter(
             valueid__in=values_ids).annotate(
-                product_count=Count('searchAttributeValue__productid')).prefetch_related('searchAttributeValue')
+                product_count=Count('searchAttributeValue__productid')
+        ).prefetch_related('searchAttributeValue').order_by("-product_count")
         return queryset

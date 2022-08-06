@@ -4,7 +4,7 @@ from core.models import Productdescriptions
 
 class ProductDescriptionsSerializer(serializers.ModelSerializer):
 
-    """ This serializer is using ProductDescription model. """
+    """ ProductDescription model serializer. """
 
     class Meta:
         model = Productdescriptions

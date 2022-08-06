@@ -4,7 +4,7 @@ from rest_framework import serializers
 
 class ProductSkusSerializer(serializers.ModelSerializer):
 
-    """ This serializer is using Productskus model. """
+    """ Productskus model serializer """
 
     class Meta:
         model = Productskus

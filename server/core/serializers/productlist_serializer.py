@@ -7,9 +7,9 @@ from .productdescription_serializer import ProductDescriptionsSerializer
 
 class ProductListSerializer(serializers.ModelSerializer):
 
-    """ This serializer is using products Model and including when extra serializer from other models. 
-    and also include product skus, product elements and product descriptions. Nested serializers are used.
-    for containing product skus, product elements and product descriptions Models data. """
+    """ Products Model serializer including child serializers of other models. 
+    like product skus, product elements and product descriptions. these serializers
+    providing related data of product"""
 
     productSkus = ProductSkusSerializer(many=True)
     productElements = ProductElementsSerializer(many=True)
@@ -19,10 +19,8 @@ class ProductListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = [
-
             'productid',
             'mfgpartno',
-            'categoryid',
             'productSkus',
             'productElements',
             'productDescription',

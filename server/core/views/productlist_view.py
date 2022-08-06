@@ -17,6 +17,9 @@ class ProductListView(ListAPIView):
         self.all_categories = None
 
     def get_queryset(self):
+        # flag = self.request.query_params.get('flag')
+        # if not flag:
+        #     return Product.objects.none()
         category_id = self.request.query_params.get(
             'categoryid', None)
         # getting all child categories of the category ids

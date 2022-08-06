@@ -3,17 +3,18 @@ from core.views import *
 
 
 urlpatterns = [
-    path('category/', CategoryListView.as_view()),
-    path('category/filter/name/', CategoryFilterNameView.as_view()),
-    path('product/type/list/', ProductTypeFilterListView.as_view()),
-    path('manufacturer/filter/name/', ManufacturerFilter.as_view()),
-    path('product/type/filter/name/', ProductTypeFilterNames.as_view()),
+    path('category/', CategoryListView.as_view()),      # Done
+    path('category/filter/name/', CategoryFilterNameView.as_view()),  # Done
+    path('products/filter/list', ProductListCategoryFilterView.as_view()),  # Done
+    path('product/type/filter/name/', ProductTypeFilterNames.as_view()),  # Done
+    path('product/type/list/', ProductTypeFilterListView.as_view()),     # Done
+    path('manufacturer/filter/name/', ManufacturerFilter.as_view()),       # Done
+    path('product/manufacturer/filter/',
+         ProductManufacterFilterListView.as_view()),  # Done
+    path('products/', ProductListView.as_view()),  # Done
+    path('products/search/', SearchProductListView.as_view()),  # Done
     # path('product/attribute/filter/name/',
     #      ProductAttribuiteFilterNames.as_view()),
-    path('products/', ProductListView.as_view()),
-    path('product/manufacturer/filter/',
-         ProductManufacterFilterListView.as_view()),
-    # search product list
-    path('products/search/', SearchProductListView.as_view()),
+
 
 ]

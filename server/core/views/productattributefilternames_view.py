@@ -1,9 +1,7 @@
 from rest_framework import permissions
 from rest_framework.generics import ListAPIView
 from core.serializers import ProductAttributeSerializer
-from core.models import Productattribute, SearchAttribute, Product
-from core.models import Attributenames
-from core.models import SearchAttributeValues
+from core.models import SearchAttribute, Product
 
 
 class ProductAttribuiteFilterNames(ListAPIView):

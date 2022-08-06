@@ -1,3 +1,4 @@
+from django.db.models import Count
 from rest_framework import permissions
 from rest_framework.generics import ListAPIView
 from core.utils import categories_with_all_childs
@@ -25,5 +26,8 @@ class ProductTypeFilterNames(ListAPIView):
         values_ids = SearchAttribute.objects.filter(
             productid__in=product_ids, attributeid__name='Product Type').values('valueid')
         # getting valueNames from  searchAttributeValues table by using filtered value_ids
-        queryset = SearchAttributeValues.objects.filter(valueid__in=values_ids)
+        # annotate to get the count of products for each value and prefetch_related to pre load products using related name.
+        queryset = SearchAttributeValues.objects.filter(
+            valueid__in=values_ids).annotate(
+                product_count=Count('searchAttributeValue__productid')).prefetch_related('searchAttributeValue')
         return queryset

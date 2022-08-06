@@ -1,3 +1,4 @@
+from django.db.models import Count
 from rest_framework import permissions
 from core.models import Manufacturer, Product
 from rest_framework.generics import ListAPIView
@@ -24,9 +25,8 @@ class ManufacturerFilter(ListAPIView):
         manufacturer_ids = Product.objects.filter(categoryid__in=self.all_categories).values(
             'manufacturerid').distinct()
         # Getting manufacturer queryset on the basis of filtered manufacturerIds
+        # using Annotations to get the count of products for each manufacturer and prefetch_related to pre load products using related name.
         queryset = Manufacturer.objects.filter(
-            manufacturerid__in=manufacturer_ids)
+            manufacturerid__in=manufacturer_ids).annotate(
+                product_count=Count('manufacturerproduct')).prefetch_related('manufacturerproduct')
         return queryset
-
-    def get_serializer_context(self):
-        return {'categoryids': self.all_categories}

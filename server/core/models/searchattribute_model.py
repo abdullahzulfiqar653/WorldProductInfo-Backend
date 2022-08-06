@@ -12,7 +12,7 @@ class SearchAttribute(models.Model):
     attributeid = models.ForeignKey(
         Attributenames, on_delete=models.CASCADE, db_column='attributeid',related_name='searchAttributeName')
     valueid = models.ForeignKey(
-        SearchAttributeValues, on_delete=models.CASCADE, db_column='valueid')
+        SearchAttributeValues, on_delete=models.CASCADE, db_column='valueid',related_name='searchAttributeValue')
     localeid = models.ForeignKey(
         Locales, on_delete=models.CASCADE, blank=True, db_column='localeid')
     setnumber = models.SmallIntegerField()

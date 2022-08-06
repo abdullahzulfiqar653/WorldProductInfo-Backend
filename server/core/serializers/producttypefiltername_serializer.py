@@ -10,7 +10,7 @@ class SearchAttributeValuesListSerializer(serializers.ModelSerializer):
     category_product_count = serializers.SerializerMethodField()
 
     def get_category_product_count(self, obj: SearchAttributeValues):
-        return SearchAttribute.objects.filter(valueid=obj.valueid, attributeid__name='Product Type').count()
+        return obj.product_count
 
     class Meta:
         model = SearchAttributeValues

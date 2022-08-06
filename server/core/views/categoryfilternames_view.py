@@ -1,8 +1,9 @@
 from django.db.models import Q
-from core.utils import all_categories_have_no_childs
+from django.db.models import Count
 from rest_framework import permissions
 from core.models import Category, Product
 from rest_framework.generics import ListAPIView
+from core.utils import all_categories_have_no_childs
 from core.serializers import CategoryFilterNameListSerializer
 
 
@@ -26,7 +27,9 @@ class CategoryFilterNameView(ListAPIView):
 
         # getting categories also these categories have no childs.
         # using select_related to pre load categoryname table data
+        # using Annotations to get the count of products for each category and prefetch_related to pre load products.
         queryset = Category.objects.filter(
-            categoryid__in=products_category_ids).select_related('categorylol')
-
+            categoryid__in=products_category_ids).annotate(
+                product_count=Count('categoryproduct')).select_related(
+                    'categorylol').prefetch_related('categoryproduct')
         return queryset

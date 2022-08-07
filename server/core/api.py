@@ -9,7 +9,7 @@ urlpatterns = [
     path('manufacturer/filter/name/', ManufacturerFilter.as_view()),     # done
 
     # Below endpoints are ready but still in testing
-    path('products/', ProductListView.as_view()),  
-    # path('product/attribute/filter/name/',
-    #      ProductAttribuiteFilterNames.as_view()),
+    path('products/', ProductListView.as_view()),
+    path('product/attribute/filter/name/',
+         ProductAttribuiteFilterNames.as_view()),
 ]

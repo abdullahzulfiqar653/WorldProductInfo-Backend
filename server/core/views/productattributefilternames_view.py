@@ -23,10 +23,13 @@ class ProductAttribuiteFilterNames(APIView):
         category_id = self.request.query_params.get(
             'categoryid', None)
         self.all_categories = categories_with_all_childs(category_id)
+
         queryset_attribute = SearchAttribute.objects.filter(
             productid__categoryid__in=self.all_categories).values_list('attributeid', flat=True).distinct()
+
         queryset_value = Attributenames.objects.filter(
             attributeid__in=queryset_attribute).distinct()
+
         queryset = SearchAttribute.objects.filter(
             productid__categoryid__in=self.all_categories
         ).prefetch_related('valueid')

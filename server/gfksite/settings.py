@@ -40,10 +40,9 @@ INSTALLED_APPS = [
 
     # included Swagger UI
 
-    'drf_yasg',
+    # 'drf_yasg',
     # included django community APPS:
     'rest_framework',
-
     # self started apps:
     'core'
 ]

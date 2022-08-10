@@ -40,10 +40,9 @@ INSTALLED_APPS = [
 
     # included Swagger UI
 
-    'drf_yasg',
+    # 'drf_yasg',
     # included django community APPS:
     'rest_framework',
-
     # self started apps:
     'core'
 ]
@@ -122,6 +121,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
 }
 
 

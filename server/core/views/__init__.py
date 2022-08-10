@@ -4,3 +4,7 @@ from .producttypefilter_view import ProductTypeFilterNames
 from .manufacturerfiltername_view import ManufacturerFilter
 from .categoryfilternames_view import CategoryFilterNameView
 from .productattributefilternames_view import ProductAttribuiteFilterNames
+from .productdetail_view import ProductRetrieveView
+from .productbasicoverview_view import ProductBasicOverView
+from .productspecification_view import ProductSpecificationView
+from .productgallery_view import ProductGalleryView

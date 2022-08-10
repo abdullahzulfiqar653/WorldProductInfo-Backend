@@ -17,4 +17,5 @@ urlpatterns = [
     # Below endpoints are ready but still in testing
     path('product/attribute/filter/name/',
          ProductAttribuiteFilterNames.as_view()),
+
 ]

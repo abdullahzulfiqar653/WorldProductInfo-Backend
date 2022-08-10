@@ -3,7 +3,13 @@ from core.utils import LimitOffsetPagination
 from rest_framework.generics import ListAPIView
 from core.utils import categories_with_all_childs
 from core.serializers import ProductListSerializer
-from core.models import Product, Productdescriptions, SearchAttribute
+from core.models import (
+    Product,
+    Productdescriptions,
+    SearchAttribute,
+    Productsimilar,
+    Productaccessories
+)
 
 
 class ProductListView(ListAPIView):
@@ -17,7 +23,8 @@ class ProductListView(ListAPIView):
 
     def __init__(self, **kwargs) -> None:
         self.all_categories = None
-        self.flags_list = ['manufacturer', 'category', 'producttype']
+        self.flags_list = ['manufacturer',
+                           'category', 'producttype', 'similar']
         # prefectched productDescription, productSkus and productElements.
         self.initial_querset = Product.objects.prefetch_related(
             'productDescription',
@@ -66,6 +73,22 @@ class ProductListView(ListAPIView):
             product_ids = Productdescriptions.objects.filter(
                 description__icontains=search).values('productid')
 
+            # getting the product query set by using the filtered product id.
+            queryset = self.initial_querset.filter(productid__in=product_ids)
+            return queryset
+        elif flag == 'similar':
+            product_id = self.request.query_params.get('productid', None)
+            # getting product id from the productsimilar table by using product id.
+            product_ids = Productsimilar.objects.filter(
+                similarproductid=product_id).values('productid')
+            # getting the product query set by using the filtered product id.
+            queryset = self.initial_querset.filter(productid__in=product_ids)
+            return queryset
+        elif flag == 'accessories':
+            product_id = self.request.query_params.get('productid', None)
+            # getting product id from the productaccessories table by using product id.
+            product_ids = Productaccessories.objects.filter(
+                accessoryproductid=product_id).values('productid')
             # getting the product query set by using the filtered product id.
             queryset = self.initial_querset.filter(productid__in=product_ids)
             return queryset

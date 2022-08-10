@@ -69,5 +69,4 @@ class ProductListView(ListAPIView):
             # getting the product query set by using the filtered product id.
             queryset = self.initial_querset.filter(productid__in=product_ids)
             return queryset
-        else:
-            return Product.objects.none()
+        return self.initial_querset.none()

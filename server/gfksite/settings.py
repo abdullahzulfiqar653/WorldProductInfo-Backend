@@ -37,19 +37,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    # CORS Headers
+    'corsheaders',
     # included Swagger UI
 
     # 'drf_yasg',
     # included django community APPS:
     'rest_framework',
     # self started apps:
-    'core'
+    'core',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -124,6 +126,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
 }
 
+# CORS HEADER ALLOWED_HOSTS
+ALLOWED_HOSTS = ['*']
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

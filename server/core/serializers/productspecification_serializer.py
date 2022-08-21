@@ -17,6 +17,7 @@ class ProductSpecificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = [
+
             'categoryid',
             'productAttribute'
 

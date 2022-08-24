@@ -9,6 +9,7 @@ class ProductDescriptionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Productdescriptions
         fields = [
+            'id',
             'type',
             'description',
         ]

@@ -1,5 +1,4 @@
-from pickle import TRUE
-from re import T
+
 from django.db import models
 
 

@@ -1,12 +1,11 @@
-from email.mime import image
-import imp
-from pickle import TRUE
-from re import T
 from django.db import models
 from .locale_model import Locales
+from viewflow.fields import CompositeKey
 from .unit_model import Units
 
+
 class Unitnames(models.Model):
+    id = CompositeKey(columns=['unitid', 'localeid'])
     unitid = models.ForeignKey(
         Units, on_delete=models.CASCADE, db_column='unitid')
     name = models.CharField(

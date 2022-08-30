@@ -1,10 +1,10 @@
-import imp
-from pickle import TRUE
-from re import T
 from django.db import models
+from viewflow.fields import CompositeKey
 from .product_model import Product
 
+
 class Productupsell(models.Model):
+    id = CompositeKey(columns=['productid', 'upsellproductid'])
     productid = models.ForeignKey(
         Product, on_delete=models.CASCADE, db_column='productid')
     upsellproductid = models.ForeignKey(

@@ -12,9 +12,13 @@ djangorestframework = "==3.13.1"
 django-cors-headers = "==3.11.0"
 mysqlclient = "*"
 mssql-django = "*"
+django-viewflow = "*"
 
 [dev-packages]
 autopep8 = "*"
 
 [requires]
 python_version = "3.9"
+
+[pipenv]
+allow_prereleases = true

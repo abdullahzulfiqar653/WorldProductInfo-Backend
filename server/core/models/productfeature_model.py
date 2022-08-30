@@ -1,6 +1,3 @@
-import imp
-from pickle import TRUE
-from re import T
 from django.db import models
 from .locale_model import Locales
 from .product_model import Product

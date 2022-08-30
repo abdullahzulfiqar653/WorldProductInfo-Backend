@@ -4,7 +4,7 @@ from core.models import Categorydisplayattributes
 
 class categorydisplayattributeAdmin(admin.ModelAdmin):
     list_display = [
-        'cat_id',
+        
         'isactive',
         'headerid',
         'categoryid',

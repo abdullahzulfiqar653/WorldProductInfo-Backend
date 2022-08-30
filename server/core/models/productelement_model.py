@@ -1,9 +1,7 @@
-import importlib
-from pickle import TRUE
-from re import T
 from django.db import models
 from .product_model import Product
 from .locale_model import Locales
+
 
 class Productelements(models.Model):
     productelementid = models.BigIntegerField(primary_key=True)

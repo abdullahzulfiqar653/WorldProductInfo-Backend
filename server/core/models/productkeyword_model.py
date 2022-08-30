@@ -1,11 +1,11 @@
-from multiprocessing.spawn import import_main_path
-from pickle import TRUE
-from re import T
 from django.db import models
+from viewflow.fields import CompositeKey
 from .product_model import Product
 from .locale_model import Locales
 
+
 class Productkeywords(models.Model):
+    id = CompositeKey(columns=['productid', 'keyword', 'localeid'])
     productid = models.ForeignKey(
         Product, on_delete=models.CASCADE, db_column='productid')
     keywords = models.CharField(

@@ -1,12 +1,11 @@
-import imp
-from pickle import TRUE
-from re import T
 from django.db import models
+from viewflow.fields import CompositeKey
 from .category_model import Category
 from .attributename_model import Attributenames
 
-class Categorysearchattributes(models.Model):
 
+class Categorysearchattributes(models.Model):
+    id = CompositeKey(columns=['categoryid', 'attributeid'])
     categoryid = models.ForeignKey(
         Category, on_delete=models.CASCADE, db_column='categoryid')
     attributeid = models.ForeignKey(

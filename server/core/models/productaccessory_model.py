@@ -1,11 +1,11 @@
-import imp
-from pickle import TRUE
-from re import T
 from django.db import models
 from .product_model import Product
+from viewflow.fields import CompositeKey
 from .locale_model import Locales
 
+
 class Productaccessories(models.Model):
+    id = CompositeKey(columns=['productid', 'accessoryid'])
     productid = models.ForeignKey(
         Product, on_delete=models.CASCADE, db_column='productid')
     accessoryproductid = models.ForeignKey(

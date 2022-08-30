@@ -1,6 +1,5 @@
-from pickle import TRUE
-from re import T
 from django.db import models
+
 
 class Manufacturer(models.Model):
     manufacturerid = models.IntegerField(primary_key=True)

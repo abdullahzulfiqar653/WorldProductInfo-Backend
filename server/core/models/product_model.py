@@ -1,6 +1,3 @@
-import imp
-from pickle import TRUE
-from re import T
 from django.db import models
 from .manufacturer_model import Manufacturer
 from .category_model import Category
@@ -9,7 +6,7 @@ from .category_model import Category
 class Product(models.Model):
     productid = models.IntegerField(primary_key=True)
     manufacturerid = models.ForeignKey(
-        Manufacturer, on_delete=models.CASCADE, db_column='manufacturerid',related_name='manufacturerproduct')
+        Manufacturer, on_delete=models.CASCADE, db_column='manufacturerid', related_name='manufacturerproduct')
     isactive = models.BooleanField()
     mfgpartno = models.CharField(
         max_length=70)

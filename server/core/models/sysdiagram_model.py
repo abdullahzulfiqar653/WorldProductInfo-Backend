@@ -1,10 +1,9 @@
-import imp
-from pickle import TRUE
-from re import T
 from django.db import models
+from viewflow.fields import CompositeKey
 
 
 class Sysdiagrams(models.Model):
+    id = CompositeKey(columns=['principal_id', 'diagram_id'])
     name = models.CharField(
         max_length=128)
     principal_id = models.IntegerField()

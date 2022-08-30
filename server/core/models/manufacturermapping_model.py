@@ -1,10 +1,11 @@
-from pickle import TRUE
-from re import T
 from django.db import models
+from viewflow.fields import CompositeKey
 from .manufacturer_model import Manufacturer
+
 
 class Manufacturermapping(models.Model):
     # Field name made lowercase.
+    id = CompositeKey(columns=['manufacturerid', 'manufacturername'])
     manufacturername = models.CharField(
         max_length=70)
     manufacturerid = models.ForeignKey(

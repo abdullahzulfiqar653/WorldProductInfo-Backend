@@ -1,7 +1,6 @@
-from pickle import TRUE
-from re import T
 from django.db import models
 from .unit_model import Units
+
 
 class SearchAttributeValues(models.Model):
     valueid = models.IntegerField(primary_key=True)

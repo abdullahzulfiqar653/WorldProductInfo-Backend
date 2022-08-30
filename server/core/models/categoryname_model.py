@@ -1,10 +1,7 @@
-import imp
-from statistics import mode
-from pickle import TRUE
-from re import T
 from django.db import models
 from .category_model import Category
 from .locale_model import Locales
+
 
 class Categorynames(models.Model):
     categoryid = models.OneToOneField(

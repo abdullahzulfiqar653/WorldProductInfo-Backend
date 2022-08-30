@@ -78,6 +78,7 @@ class ProductListView(ListAPIView):
             return queryset
 
         elif flag == 'similar':
+        
             product_id = self.request.query_params.get('productid')
             # getting product id from the productsimilar table by using product id.
             product_ids = Productsimilar.objects.filter(

@@ -19,7 +19,6 @@ class ProductListSerializer(serializers.ModelSerializer):
     image_url = serializers.SerializerMethodField()
 
     def get_image_url(self, obj):
-        etilze_content = False
         if etilze_content:
             return "https://content.etilize.com/Main/{}.jpg?noimage=logo".format(obj.productid)
         else:

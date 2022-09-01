@@ -1,6 +1,6 @@
 from core.models import Product
 from rest_framework import serializers
-from gfksite.settings import etilze_content
+from gfksite.settings import etilze_content, HOST_URL, HOST_PORT
 from .productsku_serializer import ProductSkusSerializer
 from .productelement_serializer import ProductElementsSerializer
 from .productdescription_serializer import ProductDescriptionsSerializer
@@ -23,7 +23,7 @@ class ProductListSerializer(serializers.ModelSerializer):
         if etilze_content:
             return "https://content.etilize.com/Main/{}.jpg?noimage=logo".format(obj.productid)
         else:
-            return "http://127.0.0.1:8000/media/2.jpg"
+            return "{host_url}:{host_port}/media/2.jpg".format(host_url=HOST_URL, host_port=HOST_PORT)
 
     class Meta:
         model = Product

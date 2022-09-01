@@ -24,7 +24,8 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 # False if not in os.environ because of casting above
 DEBUG = env('DEBUG')
-
+HOST_URL = env('HOST_URL')
+HOST_PORT = env('HOST_PORT')
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
 INTERNAL_IPS = env('INTERNAL_IPS')

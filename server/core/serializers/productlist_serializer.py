@@ -23,7 +23,7 @@ class ProductListSerializer(serializers.ModelSerializer):
         if etilze_content:
             return "https://content.etilize.com/Main/{}.jpg?noimage=logo".format(obj.productid)
         else:
-            return "http://192.168.43.125:8000/media/2.jpg"
+            return "http://127.0.0.1:8000/media/2.jpg"
 
     class Meta:
         model = Product

@@ -21,7 +21,7 @@ class ProductListSerializer(serializers.ModelSerializer):
     def get_image_url(self, obj):
 
         if etilze_content:
-            return "https://content.etilize.com/images/60/{}.jpg".format(obj.productid)
+            return "https://content.etilize.com/images/60/{}.jpg?noimage=logo".format(obj.productid)
         else:
             return "http://localhost:8000/media/{}.jpg".format(obj.productid)
 

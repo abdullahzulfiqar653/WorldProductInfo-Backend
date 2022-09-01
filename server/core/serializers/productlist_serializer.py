@@ -19,11 +19,11 @@ class ProductListSerializer(serializers.ModelSerializer):
     image_url = serializers.SerializerMethodField()
 
     def get_image_url(self, obj):
-
+        etilze_content = False
         if etilze_content:
-            return "https://content.etilize.com/images/60/{}.jpg?noimage=logo".format(obj.productid)
+            return "https://content.etilize.com/Main/{}.jpg?noimage=logo".format(obj.productid)
         else:
-            return "http://localhost:8000/media/{}.jpg".format(obj.productid)
+            return "http://192.168.43.125:8000/media/2.jpg"
 
     class Meta:
         model = Product

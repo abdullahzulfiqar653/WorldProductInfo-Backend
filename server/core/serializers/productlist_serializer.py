@@ -1,6 +1,6 @@
 from core.models import Product
 from rest_framework import serializers
-from gfksite.settings import etilze_content, HOST_URL, HOST_PORT
+from gfksite.settings import ETILIZE_CONTENT, HOST_URL, HOST_PORT
 from .productsku_serializer import ProductSkusSerializer
 from .productelement_serializer import ProductElementsSerializer
 from .productdescription_serializer import ProductDescriptionsSerializer
@@ -19,8 +19,7 @@ class ProductListSerializer(serializers.ModelSerializer):
     image_url = serializers.SerializerMethodField()
 
     def get_image_url(self, obj):
-        etilze_content = False
-        if etilze_content:
+        if ETILIZE_CONTENT:
             return "https://content.etilize.com/Main/{}.jpg?noimage=logo".format(obj.productid)
         else:
             return "{host_url}:{host_port}/media/2.jpg".format(host_url=HOST_URL, host_port=HOST_PORT)

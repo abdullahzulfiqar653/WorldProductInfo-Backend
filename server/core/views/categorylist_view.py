@@ -20,7 +20,7 @@ from core.serializers import CategoryListSerializer
 
 class CategoryListView(ListAPIView):
 
-    """This ListView for getting Category names, displayorder, 
+    """This ListView for getting Category names, displayorder,
     category_level and parentcategoryid.
     """
 

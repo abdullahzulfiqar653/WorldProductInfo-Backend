@@ -18,6 +18,13 @@ class Product(models.Model):
     modifieddate = models.DateTimeField(auto_now_add=True)
     lastupdated = models.DateTimeField(auto_now_add=True)
 
+    @property
+    def get_description(self):
+        try:
+            return self.productDescription.filter(type=2).first().description
+        except Exception as e:
+            return self.productDescription.all().first().description
+
     class Meta:
         managed = False
         db_table = 'product'

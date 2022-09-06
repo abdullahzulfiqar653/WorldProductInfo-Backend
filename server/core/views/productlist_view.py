@@ -68,17 +68,14 @@ class ProductListView(ListAPIView):
 
         elif flag == 'search':
             search = self.request.query_params.get('search')
-
             # getting product id from the product table by using search keyword.
             product_ids = Productdescriptions.objects.filter(
                 description__icontains=search).values('productid')
-
             # getting the product query set by using the filtered product id.
             queryset = self.initial_querset.filter(productid__in=product_ids)
             return queryset
 
         elif flag == 'similar':
-        
             product_id = self.request.query_params.get('productid')
             # getting product id from the productsimilar table by using product id.
             product_ids = Productsimilar.objects.filter(
@@ -94,5 +91,8 @@ class ProductListView(ListAPIView):
                 accessoryproductid=product_id).values('productid')
             # getting the product query set by using the filtered product id.
             queryset = self.initial_querset.filter(productid__in=product_ids)
+            return queryset
+        elif flag == 'latest':
+            queryset = self.initial_querset.all().order_by('-lastupdated')[:12]
             return queryset
         return self.initial_querset.none()

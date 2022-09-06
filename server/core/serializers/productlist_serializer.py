@@ -12,11 +12,15 @@ class ProductListSerializer(serializers.ModelSerializer):
     like product skus, product elements and product descriptions. these serializers
     providing related data of product"""
 
-    productSkus = ProductSkusSerializer(many=True)
+    # productSkus = ProductSkusSerializer(many=True)
     productElements = ProductElementsSerializer(many=True)
-    productDescription = ProductDescriptionsSerializer(
-        many=True, read_only=True)
+    # productDescription = ProductDescriptionsSerializer(
+    #     many=True, read_only=True)
+    product_description = serializers.SerializerMethodField()
     image_url = serializers.SerializerMethodField()
+
+    def get_product_description(self, obj):
+        return obj.get_description
 
     def get_image_url(self, obj):
         if ETILIZE_CONTENT:
@@ -30,7 +34,8 @@ class ProductListSerializer(serializers.ModelSerializer):
             'productid',
             'image_url',
             'mfgpartno',
-            'productSkus',
+            # 'productSkus',
             'productElements',
-            'productDescription',
+            'product_description',
+            # 'productDescription',
         ]

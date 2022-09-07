@@ -14,13 +14,13 @@ class ProductListSerializer(serializers.ModelSerializer):
 
     # productSkus = ProductSkusSerializer(many=True)
     productElements = ProductElementsSerializer(many=True)
-    # productDescription = ProductDescriptionsSerializer(
-    #     many=True, read_only=True)
-    product_description = serializers.SerializerMethodField()
+    productDescription = ProductDescriptionsSerializer(
+        many=True, read_only=True)
+    # product_description = serializers.SerializerMethodField()
     image_url = serializers.SerializerMethodField()
 
-    def get_product_description(self, obj):
-        return obj.get_description
+    # def get_product_description(self, obj):
+    #     return obj.get_description
 
     def get_image_url(self, obj):
         if ETILIZE_CONTENT:
@@ -36,6 +36,6 @@ class ProductListSerializer(serializers.ModelSerializer):
             'mfgpartno',
             # 'productSkus',
             'productElements',
-            'product_description',
-            # 'productDescription',
+            # 'product_description',
+            'productDescription',
         ]

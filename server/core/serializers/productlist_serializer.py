@@ -13,7 +13,7 @@ class ProductListSerializer(serializers.ModelSerializer):
     providing related data of product"""
 
     # productSkus = ProductSkusSerializer(many=True)
-    productElements = ProductElementsSerializer(many=True)
+    # productElements = ProductElementsSerializer(many=True)
     productDescription = ProductDescriptionsSerializer(
         many=True, read_only=True)
     # product_description = serializers.SerializerMethodField()
@@ -35,7 +35,7 @@ class ProductListSerializer(serializers.ModelSerializer):
             'image_url',
             'mfgpartno',
             # 'productSkus',
-            'productElements',
+            # 'productElements',
             # 'product_description',
             'productDescription',
         ]

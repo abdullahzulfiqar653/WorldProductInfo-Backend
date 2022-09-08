@@ -1,3 +1,4 @@
+from django.db.models import Prefetch
 from rest_framework import permissions
 from core.utils import LimitOffsetPagination
 from rest_framework.generics import ListAPIView
@@ -27,8 +28,10 @@ class ProductListView(ListAPIView):
                            'category', 'producttype', 'similar']
         # prefectched productDescription, productSkus and productElements.
         self.initial_querset = Product.objects.prefetch_related(
-            'productDescription',
-        )
+            Prefetch('productDescription', queryset=Productdescriptions.objects.filter(
+                type=2), to_attr='type_description'),
+
+        ).filter(productDescription__type=2)
 
     def get_queryset(self):
         flag = self.request.query_params.get('flag')

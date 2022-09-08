@@ -28,8 +28,6 @@ class ProductListView(ListAPIView):
         # prefectched productDescription, productSkus and productElements.
         self.initial_querset = Product.objects.prefetch_related(
             'productDescription',
-            'productSkus',
-            'productElements__productElementProperties'
         )
 
     def get_queryset(self):

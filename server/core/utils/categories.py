@@ -28,7 +28,8 @@ def all_categories_have_no_childs(category_id):
 
 
 def categories_with_all_childs(category_id):
-    all_parent_category_ids = Category.objects.values("parentcategoryid")
+    all_parent_category_ids = Category.objects.select_related("categoryid").values(
+        "parentcategoryid")
     all_childs_of_requested_category = []
     category_ids_to_get_childs = []
     category_ids_to_get_childs.append(category_id)
@@ -36,10 +37,9 @@ def categories_with_all_childs(category_id):
     # getting categoryIds by using parentCategoryId from the category table.
     while True:
         category_ids = Category.objects.filter(
-            parentcategoryid__in=category_ids_to_get_childs)
-
+            parentcategoryid__in=category_ids_to_get_childs).values('categoryid')
         categories_have_childs = category_ids.filter(
-            categoryid__in=all_parent_category_ids)
+            categoryid__in=all_parent_category_ids).values('categoryid')
 
         all_childs_of_requested_category.extend(
             category_ids.values_list("categoryid", flat=True))

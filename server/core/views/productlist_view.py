@@ -30,8 +30,7 @@ class ProductListView(ListAPIView):
         self.initial_querset = Product.objects.prefetch_related(
             Prefetch('productDescription', queryset=Productdescriptions.objects.filter(
                 type=2), to_attr='type_description'),
-
-        ).filter(productDescription__type=2)
+        ).filter(productDescription__type=2).order_by('-lastupdated')
 
     def get_queryset(self):
         flag = self.request.query_params.get('flag')
@@ -50,7 +49,7 @@ class ProductListView(ListAPIView):
             queryset = self.initial_querset.filter(productid__in=product_ids,
                                                    categoryid__in=self.all_categories
                                                    )
-            return queryset
+            return queryset.order_by('-modifieddate', '-creationdate')
 
         elif flag == 'producttype':
             value_id = self.request.query_params.get('valueid')
@@ -60,12 +59,12 @@ class ProductListView(ListAPIView):
             # getting the product query set by using the filtered product id and category_id.
             queryset = self.initial_querset.filter(productid__in=product_ids,
                                                    categoryid__in=self.all_categories)
-            return queryset
+            return queryset.order_by('-modifieddate', '-creationdate')
 
         elif flag == 'category':
             queryset = self.initial_querset.filter(
                 categoryid__in=self.all_categories)
-            return queryset
+            return queryset.order_by('-modifieddate', '-creationdate')
 
         elif flag == 'search':
             search = self.request.query_params.get('search')
@@ -74,7 +73,7 @@ class ProductListView(ListAPIView):
                 description__icontains=search).values('productid')
             # getting the product query set by using the filtered product id.
             queryset = self.initial_querset.filter(productid__in=product_ids)
-            return queryset
+            return queryset.order_by('-modifieddate', '-creationdate')
 
         elif flag == 'similar':
             product_id = self.request.query_params.get('productid')
@@ -83,7 +82,7 @@ class ProductListView(ListAPIView):
                 similarproductid=product_id).values('productid')
             # getting the product query set by using the filtered product id.
             queryset = self.initial_querset.filter(productid__in=product_ids)
-            return queryset
+            return queryset.order_by('-modifieddate', '-creationdate')
 
         elif flag == 'accessories':
             product_id = self.request.query_params.get('productid')
@@ -92,8 +91,9 @@ class ProductListView(ListAPIView):
                 accessoryproductid=product_id).values('productid')
             # getting the product query set by using the filtered product id.
             queryset = self.initial_querset.filter(productid__in=product_ids)
-            return queryset
+            return queryset.order_by('-modifieddate', '-creationdate')
+
         elif flag == 'latest':
-            queryset = self.initial_querset.all().order_by('-lastupdated')[:12]
+            queryset = self.initial_querset.all()[:12]
             return queryset
         return self.initial_querset.none()

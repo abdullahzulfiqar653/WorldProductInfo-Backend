@@ -1,5 +1,5 @@
-from django.db.models import Prefetch
 from rest_framework import permissions
+from django.db.models import Prefetch, Q
 from core.utils import LimitOffsetPagination
 from rest_framework.generics import ListAPIView
 from core.utils import categories_with_all_childs
@@ -68,11 +68,12 @@ class ProductListView(ListAPIView):
 
         elif flag == 'search':
             search = self.request.query_params.get('search')
-            # getting product id from the product table by using search keyword.
-            product_ids = Productdescriptions.objects.filter(
-                description__icontains=search).values('productid')
-            # getting the product query set by using the filtered product id.
-            queryset = self.initial_querset.filter(productid__in=product_ids)
+
+            queryset = self.initial_querset.filter(
+                Q(mfgpartno__iexact=search) |
+                Q(productDescription__description__icontains=search)
+            ).distinct()
+
             return queryset.order_by('-modifieddate', '-creationdate')
 
         elif flag == 'similar':

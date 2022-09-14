@@ -33,6 +33,10 @@ class CategoryFilterNameView(ListAPIView):
         """
         queryset = Category.objects.filter(
             categoryid__in=products_category_ids).annotate(
-                product_count=Count('categoryproduct')).select_related(
-                    'categorylol').prefetch_related('categoryproduct').order_by("-product_count")
+                product_count=Count('categoryproduct',
+                                    filter=(Q(
+                                        categoryproduct__categoryid__in=all_categories,
+                                        categoryproduct__productDescription__type=2)))
+        ).select_related(
+            'categorylol').prefetch_related('categoryproduct').order_by("-product_count")
         return queryset

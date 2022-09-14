@@ -43,10 +43,9 @@ class ProductListView(ListAPIView):
         if flag == 'manufacturer':
             manufacturer_id = self.request.query_params.get('manufacturerid')
             # Getting product id from the product table by using manufacturer id .
-            product_ids = Product.objects.filter(
-                manufacturerid=manufacturer_id).values('productid')
+
             # Getting the product query set by using the filtered product id.
-            queryset = self.initial_querset.filter(productid__in=product_ids,
+            queryset = self.initial_querset.filter(manufacturerid=manufacturer_id,
                                                    categoryid__in=self.all_categories
                                                    )
             return queryset.order_by('-modifieddate', '-creationdate')
@@ -71,7 +70,7 @@ class ProductListView(ListAPIView):
 
             queryset = self.initial_querset.filter(
                 Q(mfgpartno__iexact=search) |
-                Q(productDescription__description__icontains=search)
+                Q(productDescription__description__icontains=search, ), productDescription__type=2
             ).distinct()
 
             return queryset.order_by('-modifieddate', '-creationdate')

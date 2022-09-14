@@ -24,6 +24,17 @@ class ProductListSerializer(serializers.ModelSerializer):
         else:
             return "media/2.jpg"
 
+    # def get_image_content(self, obj):
+    #     if ETILIZE_CONTENT:
+    #         image = "https://content.etilize.com/Main/{}.jpg?noimage=logo".format(
+    #             obj.productid)
+    #     else:
+    #         image = "media/2.jpg"
+
+    #     return {
+    #         "image": image,
+    #         "etilize_content": ETILIZE_CONTENT
+    #     }
     class Meta:
         model = Product
         fields = [

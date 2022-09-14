@@ -35,5 +35,4 @@ class ProductAttribuiteFilterNames(APIView):
         ).prefetch_related('valueid')
         serializer = ProductAttributeSerializer(queryset, many=True)
         serializer_2 = AttributeSerializer(queryset_value, many=True)
-        # return a.data
         return Response({"Values": serializer.data, "Names": serializer_2.data}, status=200)

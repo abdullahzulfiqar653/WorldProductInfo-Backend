@@ -28,10 +28,14 @@ class ManufacturerFilter(ListAPIView):
         # Getting manufacturer queryset on the basis of filte red manufacturerIds
         # using Annotations to get the count of products for each manufacturer and
         # prefetch_related to pre load products using related name.
-        queryset = Manufacturer.objects.filter(
-            manufacturerid__in=manufacturer_ids).annotate(
-                product_count=Count('manufacturerproduct',
-                                    filter=(Q(
-                                        manufacturerproduct__categoryid__in=self.all_categories, manufacturerproduct__productDescription__type=2)))
-        ).prefetch_related('manufacturerproduct').order_by("-product_count")
+        queryset = Manufacturer.objects.annotate(
+            product_count=Count('manufacturerproduct',
+                                filter=(Q(
+                                        manufacturerproduct__categoryid__in=self.all_categories,
+                                        manufacturerproduct__productDescription__type=2
+                                        )))).prefetch_related('manufacturerproduct'
+                                                              ).order_by("-product_count"
+                                                                         ).filter(
+            manufacturerid__in=manufacturer_ids,
+            product_count__gt=0)
         return queryset

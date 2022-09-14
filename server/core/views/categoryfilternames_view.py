@@ -31,12 +31,17 @@ class CategoryFilterNameView(ListAPIView):
         3: using Annotations to get the count of products for each category
         4: prefetch_related to pre load products table.
         """
-        queryset = Category.objects.filter(
-            categoryid__in=products_category_ids).annotate(
-                product_count=Count('categoryproduct',
-                                    filter=(Q(
+        queryset = Category.objects.annotate(
+            product_count=Count('categoryproduct',
+                                filter=(Q(
                                         categoryproduct__categoryid__in=all_categories,
                                         categoryproduct__productDescription__type=2)))
+        ).filter(
+            categoryid__in=products_category_ids,
+            product_count__gt=0
         ).select_related(
-            'categorylol').prefetch_related('categoryproduct').order_by("-product_count")
+            'categorylol'
+        ).prefetch_related(
+            'categoryproduct'
+        ).order_by("-product_count")
         return queryset

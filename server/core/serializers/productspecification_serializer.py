@@ -2,7 +2,7 @@ from itertools import product
 from core.models import Product
 from rest_framework import serializers
 from .category_serializer import CategorySerializer
-from .productattribute_serializer import ProductAttributeSerializer
+from .productsepecificationattribute_serializer import ProductSpecificationAttributeSerializer
 
 
 class ProductSpecificationSerializer(serializers.ModelSerializer):
@@ -11,7 +11,7 @@ class ProductSpecificationSerializer(serializers.ModelSerializer):
     providing related data of product"""
 
     categoryid = CategorySerializer(read_only=True)
-    productAttribute = ProductAttributeSerializer(
+    productAttribute = ProductSpecificationAttributeSerializer(
         many=True, read_only=True)
 
     class Meta:
@@ -19,5 +19,4 @@ class ProductSpecificationSerializer(serializers.ModelSerializer):
         fields = [
             'categoryid',
             'productAttribute'
-
         ]

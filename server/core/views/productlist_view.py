@@ -42,12 +42,9 @@ class ProductListView(ListAPIView):
 
         if flag == 'manufacturer':
             manufacturer_id = self.request.query_params.get('manufacturerid')
-            # Getting product id from the product table by using manufacturer id .
-
             # Getting the product query set by using the filtered product id.
             queryset = self.initial_querset.filter(manufacturerid=manufacturer_id,
-                                                   categoryid__in=self.all_categories
-                                                   )
+                                                   categoryid__in=self.all_categories)
             return queryset.order_by('-modifieddate', '-creationdate')
 
         elif flag == 'producttype':
@@ -94,6 +91,12 @@ class ProductListView(ListAPIView):
             return queryset.order_by('-modifieddate', '-creationdate')
 
         elif flag == 'latest':
-            queryset = self.initial_querset.all()[:12]
+            queryset = self.initial_querset.all()
+            return queryset
+
+        elif flag == 'onlyManufacture':
+            manufacturer_id = self.request.query_params.get('manufacturerid')
+            queryset = self.initial_querset.filter(
+                manufacturerid=manufacturer_id)
             return queryset
         return self.initial_querset.none()

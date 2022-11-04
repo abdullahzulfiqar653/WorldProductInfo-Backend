@@ -5,7 +5,7 @@ Project name: **_GfkDataViewer_**
 **clone project using HTTPS or SSH**
 
 **_HTTPS:_**
-`git clone https://github.com/aquaristar/GfkDataViewer.git`
+`https://github.com/abdullahzulfiqar785/WorldProductInfo-Backend.git`
 
 **_SSH:_(to use SSH set your email in local project config file)**
 `git@github.com:abdullahzulfiqar785/WorldProductInfo-Backend.git`

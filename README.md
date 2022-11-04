@@ -6,9 +6,13 @@ Project name: **_GfkDataViewer_**
 
 1: **making environment and installing dependencies**
 
-    macOS/Linux/Windows:
-    ```pip install pipenv```
-    ```pipenv install```
+macOS/Linux/Windows:
+```
+pip install pipenv
+```
+```
+pipenv install
+```
 
 after that use the command **pipenv --venv** so will have the interpretar path.
 Select interpreter from this path and activate the environment

@@ -8,7 +8,7 @@ Project name: **_GfkDataViewer_**
 `git clone https://github.com/aquaristar/GfkDataViewer.git`
 
 **_SSH:_(to use SSH set your email in local project config file)**
-`git clone git@github.com:aquaristar/GfkDataViewer.git`
+`git@github.com:abdullahzulfiqar785/WorldProductInfo-Backend.git`
 
 **make and activate environment for project using command given**
 

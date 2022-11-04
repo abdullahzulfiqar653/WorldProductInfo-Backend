@@ -1,6 +1,6 @@
-# GfkDataViewer
+# WorldProductInfo
 
-Project name: **_GfkDataViewer_**
+Project name: **_WorldProductInfo_**
 
 **make and activate environment for project using command given**
 

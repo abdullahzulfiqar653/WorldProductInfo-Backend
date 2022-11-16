@@ -12,5 +12,6 @@ blocks:
           commands:
             - sem-version python 3.9
             - checkout
+            - cache restore
             - pip install pipenv
             - pipenv install

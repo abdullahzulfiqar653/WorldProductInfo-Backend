@@ -21,7 +21,6 @@ blocks:
       jobs:
         - name: Unit Testing
           commands:
-            - cd server
             - python manage.py makemigrations
             - python manage.py migrate
             - python manage.py test

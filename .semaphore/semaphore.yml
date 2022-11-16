@@ -16,3 +16,20 @@ blocks:
             - cache restore
             - pip install --cache-dir .pip_cache -r requirements.txt
             - cache store
+  - name: Test
+    task:
+      jobs:
+        - name: Unit Testing
+          commands:
+            - sem-version python 3.9
+            - checkout
+            - cache restore
+            - pip install --cache-dir .pip_cache -r requirements.txt
+            - cd server
+            - python manage.py makemigrations
+            - python manage.py migrate
+            - python manage.py test
+        - name: able to deploy
+          commands:
+            - cd server
+            - python manage.py check --deploy

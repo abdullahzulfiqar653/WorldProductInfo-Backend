@@ -16,4 +16,3 @@ blocks:
             - cache restore
             - pip install pipenv
             - pipenv install --cache-dir .pip_cache
-            - cache store

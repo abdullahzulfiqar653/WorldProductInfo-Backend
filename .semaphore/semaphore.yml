@@ -15,4 +15,4 @@ blocks:
             - mkdir .pip_cache
             - cache restore
             - pip install pipenv
-            - 'pipenv install --cache-dir '
+            - pipenv install

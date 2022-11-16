@@ -8,9 +8,3 @@ blocks:
   - name: Block
     task:
       jobs: []
-  - name: Test
-    task:
-      jobs:
-        - name: Unit Testing
-          commands:
-            - cd ./server/

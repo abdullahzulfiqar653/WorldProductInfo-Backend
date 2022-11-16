@@ -21,4 +21,4 @@ blocks:
       jobs:
         - name: Unit Testing
           commands:
-            - cd /server
+            - cd ./server/
